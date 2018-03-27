@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Record Data Sapi</string>
+    <string name="search">Search</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="type_name">Uid Rfid</string>
+    <string name="tambah">tambah</string>
+</resources>

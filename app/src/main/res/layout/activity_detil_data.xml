@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ardiani.myapplication.detilData">
+
+    <RelativeLayout
+        android:id="@+id/lay1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:fontFamily="monospace"
+            android:text="Data Umum Sapi"
+            android:textColor="#054D44"
+            android:textSize="22sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/judul"
+            android:layout_marginTop="19dp"
+            android:background="#bbb" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="110dp"
+            android:fontFamily="monospace"
+            android:text="Uid Rfid"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="110dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detiluid"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="110dp"
+            android:fontFamily="monospace"
+            android:text="uid rfid"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="140dp"
+            android:text="No.Telinga"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="140dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detilnotel"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="140dp"
+            android:fontFamily="monospace"
+            android:text="nomor telinga"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="170dp"
+            android:text="Nama Sapi"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="170dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detilnama"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="170dp"
+            android:fontFamily="monospace"
+            android:text="nama sapi"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="200dp"
+            android:text="Tgl Lahir"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="200dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detiltgl"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="200dp"
+            android:fontFamily="monospace"
+            android:text="2018-01-13"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="230dp"
+            android:text="Ras Sapi"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="230dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detilras"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="230dp"
+            android:fontFamily="monospace"
+            android:text="ras sapi"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/textstatus"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="260dp"
+            android:text="Status"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="260dp"
+            android:text=":"
+            android:textColor="#054D44" />
+
+        <TextView
+            android:id="@+id/detilstatus"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="260dp"
+            android:fontFamily="monospace"
+            android:text="status sapi"
+            android:textColor="#054D44" />
+
+        <Button
+            android:id="@+id/cetak"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/textstatus"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="61dp"
+            android:layout_toEndOf="@+id/Update"
+            android:layout_toRightOf="@+id/Update"
+            android:backgroundTint="#054D44"
+            android:clickable="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Cetak Data"
+            android:textAllCaps="false"
+            android:textColor="#D5D9D9"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/Update"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/cetak"
+            android:layout_alignBottom="@+id/cetak"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:backgroundTint="#054D44"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Update Data"
+            android:textAllCaps="false"
+            android:textColor="#D5D9D9"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

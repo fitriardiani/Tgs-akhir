@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_daftar"
+            android:icon="@drawable/ic_layers_black_24dp"
+            android:title="Daftar Tag" />
+        <item
+            android:id="@+id/nav_inseminasi"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Data Inseminasi Sapi" />
+        <item
+            android:id="@+id/nav_milik"
+            android:icon="@drawable/ic_accessibility_black_24dp"
+            android:title="Data Kepemilikan Sapi" />
+        <item
+            android:id="@+id/nav_tumbuh"
+            android:icon="@drawable/ic_card_membership_black_24dp"
+            android:title="Data Pertumbuhan Sapi" />
+        <item
+            android:id="@+id/nav_lahir"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="Data Kelahiran Sapi" />
+        <item
+            android:id="@+id/nav_sehat"
+            android:icon="@drawable/ic_add_to_queue_black_24dp"
+            android:title="Data Kesehatan Sapi" />
+
+    </group>
+
+</menu>

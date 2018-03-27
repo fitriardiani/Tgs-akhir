@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:drawable/editbox_background_normal"
+    android:padding="30dp"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id Rfid"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_id_rfid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tgl Periksa"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_tgl_periksa"
+            android:layout_below="@id/txt_id_rfid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diagnosa"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_diagnosa"
+            android:layout_below="@id/txt_tgl_periksa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vaksin"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_vaksin"
+            android:layout_below="@id/txt_diagnosa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengobatan"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:id="@+id/txt_pengobatan"
+            android:layout_below="@id/txt_vaksin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+
+    </TableRow>
+
+
+
+
+
+
+
+</TableLayout>

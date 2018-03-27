@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ardiani.myapplication.daftarTag">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:text="Daftar Tag RFID"
+        android:textAlignment="center"
+        android:textSize="22dp"
+        android:textColor="#21231c"
+        android:fontFamily="sans-serif-smallcaps"/>
+
+    <EditText
+        android:id="@+id/txidrfid"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="65dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="text"
+        android:hint=" UID RFID"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/txnotelinga"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="110dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="text"
+        android:hint=" Nomor Telinga"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/txnama"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="text"
+        android:hint=" Nama"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/txtgllahir"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="210dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="date"
+        android:hint=" Tgl Lahir (yyyymmdd)"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/txidrassapi"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="260dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="text"
+        android:hint=" Ras Sapi"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/txstatus"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="310dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ems="10"
+        android:inputType="text"
+        android:hint=" Status"
+        android:textColorHint="#054D44"
+        android:fontFamily="sans-serif" />
+
+
+    <Button
+        android:id="@+id/btnsubmit"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/txstatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/bg_login"
+        android:clickable="true"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Tambah"
+        android:textAllCaps="false"
+        android:textColor="#D5D9D9"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

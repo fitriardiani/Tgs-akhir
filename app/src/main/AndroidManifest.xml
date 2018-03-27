@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ardiani.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application
+        android:name=".app.appControler"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".bluetooth" />
+        <activity android:name=".daftarTag" />
+        <activity android:name=".listRfid" />
+        <activity android:name=".menuInseminasi" />
+        <activity android:name=".tambahInseminasi" />
+        <activity android:name=".menuKepemilikan" />
+        <activity android:name=".tambahKepemilikan" />
+        <activity android:name=".menuPertumbuhan"/>
+        <activity android:name=".tambahPertumbuhan" />
+        <activity android:name=".menuKelahiran" />
+        <activity android:name=".tambahKelahiran" />
+        <activity android:name=".menuKesehatan" />
+        <activity android:name=".tambahKesehatan" />
+        <activity android:name=".detilData" />
+        <activity android:name=".coba" />
+        <activity android:name=".coba2"></activity>
+    </application>
+
+</manifest>
