@@ -1,20 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:drawable/editbox_background_normal"
     android:orientation="vertical"
     android:padding="16dp">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id Rfid"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_id_rfid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
+        android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Uid Rfid :"/>
-
+        android:text="No. Telinga"
+        tools:layout_editor_absoluteY="21dp" />
     <TextView
-        android:id="@+id/txt_id_rfid"
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:text=":"
+        tools:layout_editor_absoluteY="19dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_notel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ras Sapi"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/ras_sapi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Sapi"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_nama_sapi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tgl Lahir"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_tgl_lahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            tools:layout_editor_absoluteY="21dp" />
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            tools:layout_editor_absoluteY="19dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="15dp" />
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+
+    </TableRow>
+
+
+</TableLayout>

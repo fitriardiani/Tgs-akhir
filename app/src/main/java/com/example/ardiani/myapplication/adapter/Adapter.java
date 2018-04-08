@@ -52,8 +52,18 @@ public class Adapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_rfid, null);
 
         TextView txt_id_rfid = (TextView) convertView.findViewById(R.id.txt_id_rfid);
+        TextView txt_no_telinga = (TextView) convertView.findViewById(R.id.txt_notel);
+        TextView txt_nama_sapi = (TextView) convertView.findViewById(R.id.txt_nama_sapi);
+        TextView txt_ras_sapi = (TextView) convertView.findViewById(R.id.ras_sapi);
+        TextView txt_tgl_lahir = (TextView) convertView.findViewById(R.id.txt_tgl_lahir);
+        TextView txt_status = (TextView) convertView.findViewById(R.id.txt_status);
 
         txt_id_rfid.setText(item.get(position).getId_rfid());
+        txt_no_telinga.setText(item.get(position).getNo_telinga());
+        txt_nama_sapi.setText(item.get(position).getNama_sapi());
+        txt_ras_sapi.setText(item.get(position).getRas_sapi());
+        txt_tgl_lahir.setText(item.get(position).getTgl_lahir());
+        txt_status.setText(item.get(position).getStatus());
 
         return convertView;
     }

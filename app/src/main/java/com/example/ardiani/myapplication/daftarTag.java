@@ -106,5 +106,7 @@ public class daftarTag extends AppCompatActivity implements View.OnClickListener
             registerRfid();
 
     }
+
+
 }
 

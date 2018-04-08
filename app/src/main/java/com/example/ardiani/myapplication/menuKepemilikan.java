@@ -1,6 +1,8 @@
 package com.example.ardiani.myapplication;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,6 +44,7 @@ import java.util.Map;
 
 public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,SearchView.OnQueryTextListener{
         ProgressDialog pDialog;
+        AlertDialog.Builder dialog;
         List<DataModelPemilik> listData = new ArrayList<DataModelPemilik>();
         Adapter_pemilik adapter;
         SwipeRefreshLayout swipe;
@@ -91,6 +95,36 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                 callData();
         }
         });
+
+                //listview ditekan lama
+                list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+                                final String idx = listData.get(position).getId_rfid();
+                                final CharSequence[] dialogitem = { "Print"};
+                                dialog = new AlertDialog.Builder(menuKepemilikan.this);
+                                dialog.setCancelable(true);
+                                dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
+                                {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which){
+                                                //TODO Auto-generated method stub
+                                                switch (which){
+                                                        case 0:
+                                                                print(idx);
+                                                                break;
+                                                }
+                                        }
+
+                                }).show();
+
+                                return false;
+                        }
+                });
+        }
+        private void print(String idx){
+
 
         }
 

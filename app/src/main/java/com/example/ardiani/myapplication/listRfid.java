@@ -1,6 +1,8 @@
 package com.example.ardiani.myapplication;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -41,6 +43,8 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         SearchView.OnQueryTextListener {
 
     ProgressDialog pDialog;
+    AlertDialog.Builder dialog;
+    View dialogView;
     List<DataModel> listData = new ArrayList<DataModel>();
     Adapter adapter;
     SwipeRefreshLayout swipe;
@@ -50,10 +54,16 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
 
     public static final String url_data = "http://peternakan.xyz/rd/search_rfid.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_rfid.php";
+    public static final String url_edit = "http://peternakan.xyz/rd/editRdis.php";
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String TAG_ID_RFID = "id_rfid";
+    public static final String TAG_no_tel ="no_telinga";
+    public static final String TAG_nama_sapi="nama_sapi";
+    public static final String TAG_ras_sapi="ras_sapi";
+    public static final String TAG_tgl_lahir="tgl_lahir";
+    public static final String TAG_status="status";
     public static final String TAG_RESULTS = "results";
     public static final String TAG_MESSAGE = "message";
     public static final String TAG_VALUE = "value";
@@ -91,6 +101,41 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
             }
         });
 
+        //listview ditekan lama
+        list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+                final String idx = listData.get(position).getId_rfid();
+                final CharSequence[] dialogitem = {"Edit", "Print"};
+                dialog = new AlertDialog.Builder(listRfid.this);
+                dialog.setCancelable(true);
+                dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        //TODO Auto-generated method stub
+                        switch (which){
+                            case 0:
+                                edit(idx);
+                                break;
+                            case 1:
+                                print(idx);
+                                break;
+                        }
+                    }
+
+                }).show();
+
+                return false;
+            }
+        });
+    }
+    private void edit(String idx){
+
+    }
+    private void print(String idx){
+
     }
 
     private void callData() {
@@ -113,7 +158,12 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
                         DataModel item = new DataModel();
 
                         item.setId_rfid(obj.getString(TAG_ID_RFID));
-                        //item.setNama(obj.getString(TAG_NAMA));
+                        item.setNo_telinga(obj.getString(TAG_no_tel));
+                        item.setNama_sapi(obj.getString(TAG_nama_sapi));
+                        item.setRas_sapi(obj.getString(TAG_ras_sapi));
+                        item.setTgl_lahir(obj.getString(TAG_tgl_lahir));
+                        item.setStatus(obj.getString(TAG_status));
+
 
                         listData.add(item);
                     } catch (JSONException e) {
@@ -197,7 +247,11 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
                             DataModel data = new DataModel();
 
                             data.setId_rfid(obj.getString(TAG_ID_RFID));
-                            //data.setNama(obj.getString(TAG_NAMA));
+                            data.setNo_telinga(obj.getString(TAG_no_tel));
+                            data.setNama_sapi(obj.getString(TAG_nama_sapi));
+                            data.setRas_sapi(obj.getString(TAG_ras_sapi));
+                            data.setTgl_lahir(obj.getString(TAG_tgl_lahir));
+                            data.setStatus(obj.getString(TAG_status));
 
                             listData.add(data);
                         }
@@ -238,6 +292,4 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
     //ArrayList<String> id_rfid = new ArrayList<String>();
-
-
 }

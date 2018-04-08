@@ -1,6 +1,8 @@
 package com.example.ardiani.myapplication;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +13,7 @@ import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,6 +47,8 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
 
     ProgressDialog pDialog;
     List<DataModelInseminasi> listData = new ArrayList<DataModelInseminasi>();
+    AlertDialog.Builder dialog;
+    View dialogView;
     Adapter_inseminasi adapter;
     SwipeRefreshLayout swipe;
     ListView list_view;
@@ -95,6 +100,34 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
                 callData();
             }
         });
+        //listview ditekan lama
+        list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+                final String idx = listData.get(position).getId_rfid();
+                final CharSequence[] dialogitem = { "Print"};
+                dialog = new AlertDialog.Builder(menuInseminasi.this);
+                dialog.setCancelable(true);
+                dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        //TODO Auto-generated method stub
+                        switch (which){
+                            case 0:
+                                print(idx);
+                                break;
+                        }
+                    }
+
+                }).show();
+
+                return false;
+            }
+        });
+    }
+    private void print(String idx){
 
     }
 
