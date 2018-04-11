@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ardiani.myapplication.R;
+import com.example.ardiani.myapplication.model.DataModelLahir;
 import com.example.ardiani.myapplication.model.DataModelPemilik;
 import com.example.ardiani.myapplication.model.DataModelSehat;
 
@@ -64,6 +65,14 @@ public class Adapter_sehat extends BaseAdapter {
         txt_pengobatan.setText(item.get(position).getPengobatan());
         txt_vaksin.setText(item.get(position).getVaksin());
         txt_diagnosa.setText(item.get(position).getVaksin());
+
+        DataModelSehat data = item.get(position);
+
+        txt_id_rfid.setText(data.getId_rfid());
+        txt_tgl_periksa.setText(data.getTgl_periksa());
+        txt_pengobatan.setText(data.getPengobatan());
+        txt_vaksin.setText(data.getVaksin());
+        txt_diagnosa.setText(data.getDiagnosa());
 
         return convertView;
     }

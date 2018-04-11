@@ -65,7 +65,19 @@ public class Adapter extends BaseAdapter {
         txt_tgl_lahir.setText(item.get(position).getTgl_lahir());
         txt_status.setText(item.get(position).getStatus());
 
+        DataModel data = item.get(position);
+
+        txt_id_rfid.setText(data.getId_rfid());
+        txt_no_telinga.setText(data.getNo_telinga());
+        txt_nama_sapi.setText(data.getNama_sapi());
+        txt_ras_sapi.setText(data.getRas_sapi());
+        txt_tgl_lahir.setText(data.getTgl_lahir());
+        txt_status.setText(data.getStatus());
+
+
         return convertView;
+
+
     }
 }
 

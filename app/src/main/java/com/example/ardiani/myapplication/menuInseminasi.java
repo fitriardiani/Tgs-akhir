@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -53,10 +55,15 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     SwipeRefreshLayout swipe;
     ListView list_view;
     private Button btnTambah;
+    LayoutInflater inflater;
+    int success;
+    EditText txid_rfid, tx_tglinseminasi, txkode_segmen, txpetugas;
+    String  id_rfid, tanggal_inseminasi, kode_segmen, petugas;
     //public static String id_rfid_g = "";
 
     public static final String url_data = "http://peternakan.xyz/rd/data_inseminasi.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_inseminasi.php";
+    public static final String url_edit = "http://peternakan.xyz/rd/editInseminasi.php";
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -67,6 +74,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     public static final String TAG_RESULTS = "results";
     public static final String TAG_MESSAGE = "message";
     public static final String TAG_VALUE = "value";
+    public static final String TAG_SUCCESS="success";
 
     String tag_json_obj = "json_obj_req";
 
@@ -127,9 +135,125 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
             }
         });
     }
-    private void print(String idx){
+
+//memanggil data untuk dicetak
+    private void print(final String idx){
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
+
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    success = jObj.getInt(TAG_SUCCESS);
+
+                    // Cek error node pada json
+                    if (success == 1) {
+                        Log.d("get edit data", jObj.toString());
+                        String idx     = jObj.getString(TAG_ID_RFID);
+                        String tanggalx_inseminasi    = jObj.getString(Tag_Tanggal_Inseminasi);
+                        String kodex_segmen  = jObj.getString(TAG_KODE_SEGMEN);
+                        String petugasx = jObj.getString(TAG_Petugas);
+
+
+                        DialogForm(idx, tanggalx_inseminasi,kodex_segmen,petugasx, "UPDATE");
+
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(menuInseminasi.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(menuInseminasi.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters ke post url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_rfid", idx);
+
+                return params;
+            }
+
+        };
+
+        appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
+//menampilkan kotak dialog form
+    private void DialogForm(String idx, String tanggalx_inseminasi, String kodex_segmen, String petugasx, String Button){
+        dialog = new AlertDialog.Builder(menuInseminasi.this);
+        inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.form_inseminasi, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(true);
+        dialog.setIcon(R.mipmap.ic_launcher);
+        dialog.setTitle("Form Data");
+
+        txid_rfid      = (EditText) dialogView.findViewById(R.id.txt_id);
+        tx_tglinseminasi   = (EditText) dialogView.findViewById(R.id.txt_tgl_inseminasi);
+        txkode_segmen = (EditText) dialogView.findViewById(R.id.txt_kode_segmen);
+        txpetugas      = (EditText) dialogView.findViewById(R.id.txt_petugas);
+
+        if (!idx.isEmpty()){
+            txid_rfid.setText(idx);
+            tx_tglinseminasi.setText(tanggalx_inseminasi);
+            txkode_segmen.setText(kodex_segmen);
+            txpetugas.setText(petugasx);
+        } else {
+            kosong();
+        }
+
+        dialog.setPositiveButton(Button, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                id_rfid      = txid_rfid.getText().toString();
+                tanggal_inseminasi    = tx_tglinseminasi.getText().toString();
+                kode_segmen  = txkode_segmen.getText().toString();
+                petugas = txpetugas.getText().toString();
+
+                printer();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                kosong();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void kosong(){
+        txid_rfid.setText(null);
+        tx_tglinseminasi.setText(null);
+        txpetugas.setText(null);
+        txkode_segmen.setText(null);
 
     }
+    private void printer(){
+
+    }
+
 
     private void callData() {
         listData.clear();

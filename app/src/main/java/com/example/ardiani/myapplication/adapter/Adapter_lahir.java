@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ardiani.myapplication.R;
+import com.example.ardiani.myapplication.model.DataModelInseminasi;
 import com.example.ardiani.myapplication.model.DataModelLahir;
 import com.example.ardiani.myapplication.model.DataModelPemilik;
 
@@ -64,6 +65,14 @@ public class Adapter_lahir extends BaseAdapter {
             txt_keterangan.setText(item.get(position).getKeterangan());
             txt_jenis_kelamin.setText(item.get(position).getJenis_kelamin());
             txt_petugas.setText(item.get(position).getPetugas());
+
+            DataModelLahir data = item.get(position);
+
+            txt_id_rfid.setText(data.getId_rfid());
+            txt_tgl_lahir.setText(data.getTgl_lahir());
+            txt_keterangan.setText(data.getKeterangan());
+            txt_jenis_kelamin.setText(data.getJenis_kelamin());
+            txt_petugas.setText(data.getPetugas());
 
             return convertView;
         }

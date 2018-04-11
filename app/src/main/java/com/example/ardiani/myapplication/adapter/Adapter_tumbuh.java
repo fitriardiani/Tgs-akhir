@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ardiani.myapplication.R;
+import com.example.ardiani.myapplication.model.DataModelLahir;
 import com.example.ardiani.myapplication.model.DataModelPemilik;
 import com.example.ardiani.myapplication.model.DataModelTumbuh;
 
@@ -64,6 +65,14 @@ public class Adapter_tumbuh extends BaseAdapter {
         txt_umur.setText(item.get(position).getUmur());
         txt_petugas.setText(item.get(position).getPetugas());
         txt_berat.setText(item.get(position).getBerat());
+
+        DataModelTumbuh data = item.get(position);
+
+        txt_id_rfid.setText(data.getId_rfid());
+        txt_tgl_ukur.setText(data.getTgl_ukur());
+        txt_umur.setText(data.getUmur());
+        txt_berat.setText(data.getBerat());
+        txt_petugas.setText(data.getPetugas());
 
         return convertView;
     }

@@ -3,6 +3,7 @@
     package="com.example.ardiani.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
@@ -31,7 +32,7 @@
         <activity android:name=".tambahInseminasi" />
         <activity android:name=".menuKepemilikan" />
         <activity android:name=".tambahKepemilikan" />
-        <activity android:name=".menuPertumbuhan"/>
+        <activity android:name=".menuPertumbuhan" />
         <activity android:name=".tambahPertumbuhan" />
         <activity android:name=".menuKelahiran" />
         <activity android:name=".tambahKelahiran" />
@@ -39,7 +40,7 @@
         <activity android:name=".tambahKesehatan" />
         <activity android:name=".detilData" />
         <activity android:name=".coba" />
-        <activity android:name=".coba2"></activity>
+        <activity android:name=".coba2" />
     </application>
 
 </manifest>

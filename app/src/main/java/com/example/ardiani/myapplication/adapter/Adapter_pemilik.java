@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.ardiani.myapplication.R;
 import com.example.ardiani.myapplication.model.DataModelInseminasi;
+import com.example.ardiani.myapplication.model.DataModelLahir;
 import com.example.ardiani.myapplication.model.DataModelPemilik;
 
 import java.util.List;
@@ -63,6 +64,14 @@ public class Adapter_pemilik extends BaseAdapter {
         txt_tgl_memiliki.setText(item.get(position).getTgl_memiliki());
         txt_nama_pemilik.setText(item.get(position).getNama_pemilik());
         txt_kepemilikan_ke.setText(item.get(position).getKepemilikan_ke());
+
+        DataModelPemilik data = item.get(position);
+
+        txt_id_rfid.setText(data.getId_rfid());
+        txt_tgl_memiliki.setText(data.getTgl_memiliki());
+        txt_nama_pemilik.setText(data.getNama_pemilik());
+        txt_kepemilikan_ke.setText(data.getKepemilikan_ke());
+
 
         return convertView;
     }

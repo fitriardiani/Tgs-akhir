@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ardiani.myapplication.R;
+import com.example.ardiani.myapplication.model.DataModel;
 import com.example.ardiani.myapplication.model.DataModelInseminasi;
 
 import java.util.List;
@@ -61,6 +62,13 @@ public class Adapter_inseminasi extends BaseAdapter {
         txt_inseminasi.setText(item.get(position).getTanggal_inseminasi());
         txt_kode_segmen.setText(item.get(position).getKode_segmen());
         txt_petugas.setText(item.get(position).getPetugas());
+
+        DataModelInseminasi data = item.get(position);
+
+        txt_id_rfid.setText(data.getId_rfid());
+        txt_inseminasi.setText(data.getTanggal_inseminasi());
+        txt_kode_segmen.setText(data.getKode_segmen());
+        txt_petugas.setText(data.getPetugas());
 
         return convertView;
     }
