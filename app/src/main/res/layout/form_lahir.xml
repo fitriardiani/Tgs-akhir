@@ -17,19 +17,26 @@
         android:background="@android:drawable/editbox_background_normal"/>
 
     <EditText
-        android:id="@+id/txt_tgl_inseminasi"
+        android:id="@+id/txt_tgl_lahir"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:hint="Tgl Inseminasi"
+        android:hint="Tgl Lahir"
         android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"/>
 
     <EditText
-        android:id="@+id/txt_kode_segmen"
+        android:id="@+id/txt_keterangan"
         android:layout_marginBottom="10dp"
-        android:hint="Kode Segmen"
+        android:hint="Keterangan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"/>
+    <EditText
+        android:id="@+id/txt_jenis_kelamin"
+        android:layout_marginBottom="10dp"
+        android:hint="Keterangan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"/>

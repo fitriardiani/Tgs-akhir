@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -50,8 +52,16 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         SwipeRefreshLayout swipe;
         ListView list_view;
         private Button btnTambah;
+        View dialogView;
+        LayoutInflater inflater;
+        int success;
+        EditText txid_rfid, txxtgl_memiliki, txnama_pemiilik, txkepemilikan_ke;
+        String  id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke;
+
         public static final String url_data = "http://peternakan.xyz/rd/data_pemilik.php";
         public static final String url_cari = "http://peternakan.xyz/rd/cari_pemilik.php";
+        public static final String url_edit = "http://peternakan.xyz/rd/editPemilik.php";
+
         private static final String TAG = MainActivity.class.getSimpleName();
 
         public static final String TAG_ID_RFID = "id_rfid";
@@ -61,7 +71,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         public static final String TAG_RESULTS = "results";
         public static final String TAG_MESSAGE = "message";
         public static final String TAG_VALUE = "value";
-
+        public static final String TAG_SUCCESS="success";
 
         String tag_json_obj = "json_obj_req";
 
@@ -123,10 +133,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                         }
                 });
         }
-        private void print(String idx){
 
-
-        }
 
         private void callData() {
         listData.clear();
@@ -274,5 +281,124 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                 appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
         }
                 //ArrayList<String> id_rfid = new ArrayList<String>();
+
+        private void print(final String idx){
+                StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
+
+
+                        @Override
+                        public void onResponse(String response) {
+                                Log.d(TAG, "Response: " + response.toString());
+
+                                try {
+                                        JSONObject jObj = new JSONObject(response);
+                                        success = jObj.getInt(TAG_SUCCESS);
+
+                                        // Cek error node pada json
+                                        if (success == 1) {
+                                                Log.d("get edit data", jObj.toString());
+                                                String idx     = jObj.getString(TAG_ID_RFID);
+                                                String tanggalx_memiliki    = jObj.getString(TAG_tgl_memilki);
+                                                String namax_pemilik  = jObj.getString(TAG_Nama_Pemilik);
+                                                String kepemilikanx_ke = jObj.getString(Tag_Pemilikke);
+
+
+                                                DialogForm(idx, tanggalx_memiliki,namax_pemilik,kepemilikanx_ke, "UPDATE");
+
+                                                adapter.notifyDataSetChanged();
+
+                                        } else {
+                                                Toast.makeText(menuKepemilikan.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                                        }
+                                } catch (JSONException e) {
+                                        // JSON error
+                                        e.printStackTrace();
+                                }
+
+                        }
+                }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "Error: " + error.getMessage());
+                                Toast.makeText(menuKepemilikan.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                }) {
+
+                        @Override
+                        protected Map<String, String> getParams() {
+                                // Posting parameters ke post url
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("id_rfid", idx);
+
+                                return params;
+                        }
+
+                };
+
+                appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
+        }
+
+        //menampilkan kotak dialog form
+        private void DialogForm(String idx, String tanggalx_memiliki, final String namax_pemilik, String kepemilikanx_ke, String Button){
+                dialog = new AlertDialog.Builder(menuKepemilikan.this);
+                inflater = getLayoutInflater();
+                dialogView = inflater.inflate(R.layout.form_pemilik, null);
+                dialog.setView(dialogView);
+                dialog.setCancelable(true);
+                dialog.setIcon(R.mipmap.ic_launcher);
+                dialog.setTitle("Form Data");
+
+                txid_rfid      = (EditText) dialogView.findViewById(R.id.txt_id);
+                txxtgl_memiliki   = (EditText) dialogView.findViewById(R.id.txt_tgl_memiliki);
+                txnama_pemiilik = (EditText) dialogView.findViewById(R.id.txt_nama_pemilik);
+                txkepemilikan_ke     = (EditText) dialogView.findViewById(R.id.txt_pemilikke);
+
+                if (!idx.isEmpty()){
+                        txid_rfid.setText(idx);
+                        txxtgl_memiliki.setText(tanggalx_memiliki);
+                        txnama_pemiilik.setText(namax_pemilik);
+                        txkepemilikan_ke.setText(kepemilikanx_ke);
+                } else {
+                        kosong();
+                }
+
+                dialog.setPositiveButton(Button, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                id_rfid      = txid_rfid.getText().toString();
+                                tgl_memiliki    = txxtgl_memiliki.getText().toString();
+                                nama_pemilik  = txnama_pemiilik.getText().toString();
+                                kepemilikan_ke = txkepemilikan_ke.getText().toString();
+
+                                printer();
+                                dialog.dismiss();
+                        }
+                });
+
+                dialog.setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                kosong();
+                        }
+                });
+
+                dialog.show();
+        }
+
+        private void kosong(){
+                txid_rfid.setText(null);
+                txxtgl_memiliki.setText(null);
+                txnama_pemiilik.setText(null);
+                txkepemilikan_ke.setText(null);
+
+        }
+        private void printer(){
+
+        }
+
 
 }

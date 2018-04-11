@@ -10,10 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -49,9 +51,16 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     SwipeRefreshLayout swipe;
     ListView list_view;
     private Button btnTambah;
+    LayoutInflater inflater;
+    View dialogView;
+    int success;
+    EditText txid_rfid, txtgl_periksa, txdiagnosa, txvaksin,txpetugas,txpengobatan;
+    String  id_rfid, tgl_periksa,diagnosa, vaksin,petugas,pengobatan;
 
     public static final String url_data = "http://peternakan.xyz/rd/data_kesehatan.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_kesehatan.php";
+    public static final String url_edit = "http://peternakan.xyz/rd/editSehat.php";
+
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String TAG_ID_RFID = "id_rfid";
@@ -62,6 +71,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     public static final String TAG_RESULTS = "results";
     public static final String TAG_MESSAGE = "message";
     public static final String TAG_VALUE = "value";
+    public static final String TAG_SUCCESS="success";
 
     String tag_json_obj = "json_obj_req";
 
@@ -122,10 +132,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
             }
         });
     }
-    private void print(String idx){
 
-
-    }
 
     private void callData() {
         listData.clear();
@@ -277,6 +284,130 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
         appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
     //ArrayList<String> id_rfid = new ArrayList<String>();
+
+    //mengambil data ditampilkan pada form
+    private void print(final String idx){
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
+
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    success = jObj.getInt(TAG_SUCCESS);
+
+                    // Cek error node pada json
+                    if (success == 1) {
+                        Log.d("get edit data", jObj.toString());
+                        String idx     = jObj.getString(TAG_ID_RFID);
+                        String tglx_periksa    = jObj.getString(TAG_tgl_periksa);
+                        String diagnosax  = jObj.getString(Tag_diagnosa);
+                        String vaksinx = jObj.getString(TAG_Vaksin);
+                        String pengobatanx =jObj.getString(TAG_pengobatan);
+
+
+                        DialogForm(idx, tglx_periksa,diagnosax,vaksinx,pengobatanx, "UPDATE");
+
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(menuKesehatan.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(menuKesehatan.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters ke post url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_rfid", idx);
+
+                return params;
+            }
+
+        };
+
+        appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
+
+    }
+
+    //menampilkan kotak dialog form
+    private void DialogForm(String idx, String tglx_periksa, String diagnosax, String vaksinx,String pengobatanx, String Button){
+        dialog = new AlertDialog.Builder(menuKesehatan.this);
+        inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.form_sehat, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(true);
+        dialog.setIcon(R.mipmap.ic_launcher);
+        dialog.setTitle("Form Data");
+
+        txid_rfid      = (EditText) dialogView.findViewById(R.id.txt_id);
+        txtgl_periksa   = (EditText) dialogView.findViewById(R.id.txt_tgl_periksa);
+        txdiagnosa = (EditText) dialogView.findViewById(R.id.txt_diagnosa);
+        txvaksin   = (EditText) dialogView.findViewById(R.id.txt_vaksin);
+        txpengobatan =(EditText) dialogView.findViewById(R.id.txt_pengobatan);
+
+        if (!idx.isEmpty()){
+            txid_rfid.setText(idx);
+            txdiagnosa.setText(diagnosax);
+            txvaksin.setText(vaksinx);
+            txtgl_periksa.setText(tglx_periksa);
+            txpengobatan.setText(pengobatanx);
+        } else {
+            kosong();
+        }
+
+        dialog.setPositiveButton(Button, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                id_rfid      = txid_rfid.getText().toString();
+                tgl_periksa    = txtgl_periksa.getText().toString();
+                diagnosa   = txdiagnosa.getText().toString();
+                vaksin= txvaksin.getText().toString();
+                pengobatan = txpengobatan.getText().toString();
+                printer();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                kosong();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void kosong(){
+        txid_rfid.setText(null);
+        txtgl_periksa.setText(null);
+        txdiagnosa.setText(null);
+        txvaksin.setText(null);
+        txpengobatan.setText(null);
+
+    }
+    private void printer(){
+
+    }
 
 
 }

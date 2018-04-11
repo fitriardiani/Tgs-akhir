@@ -16,28 +16,33 @@
         android:background="@android:drawable/editbox_background_normal"/>
 
     <EditText
-        android:id="@+id/txt_tgl_inseminasi"
+        android:id="@+id/txt_tgl_periksa"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:hint="Tgl Inseminasi"
+        android:hint="Tgl Periksa"
         android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"/>
 
     <EditText
-        android:id="@+id/txt_kode_segmen"
+        android:id="@+id/txt_diagnosa"
         android:layout_marginBottom="10dp"
-        android:hint="Kode Segmen"
+        android:hint="Diagnosa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"/>
     <EditText
-        android:id="@+id/txt_petugas"
-        android:layout_marginTop="10dp"
+        android:id="@+id/txt_vaksin"
         android:layout_marginBottom="10dp"
-        android:hint="Petugas"
-        android:singleLine="true"
+        android:hint="Vaksin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"/>
+    <EditText
+        android:id="@+id/txt_pengobatan"
+        android:layout_marginBottom="10dp"
+        android:hint="Pengobatan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"/>
