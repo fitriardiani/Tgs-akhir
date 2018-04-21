@@ -1,7 +1,7 @@
 package com.example.ardiani.myapplication;
 
 /**
- * Created by imrankst1221@gmail.com
+ * Created by fitriardiani56@.com
  */
 
 import android.app.ListActivity;
