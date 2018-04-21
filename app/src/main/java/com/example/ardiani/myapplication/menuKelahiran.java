@@ -2,6 +2,7 @@ package com.example.ardiani.myapplication;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
@@ -41,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +64,10 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txxtgl_lahir, tketerangan, txjenis_kelamin,txpetugas;
     String  id_rfid, tgl_lahir,keterangan, jenis_kelamin,petugas;
+
+    private static BluetoothSocket btsocket;
+    private static OutputStream outputStream;
+
 
     public static final String url_data = "http://peternakan.xyz/rd/data_kelahiran.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_kelahiran.php";
@@ -318,7 +324,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                         String petugasx = jObj.getString(TAG_Petugas);
 
 
-                        DialogForm(idx, tglx_lahir,keteranganx,jenisx_kelamin,petugasx, "UPDATE");
+                        DialogForm(idx, tglx_lahir,keteranganx,jenisx_kelamin,petugasx, "PRINT");
 
                         adapter.notifyDataSetChanged();
 
@@ -417,6 +423,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
 
     }
     private void printer(){
+
 
     }
 

@@ -41,6 +41,7 @@
         <activity android:name=".detilData" />
         <activity android:name=".coba" />
         <activity android:name=".coba2" />
+        <activity android:name=".bluet"></activity>
     </application>
 
 </manifest>

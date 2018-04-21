@@ -119,7 +119,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
             public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
 
                 final String idx = listData.get(position).getId_rfid();
-                final CharSequence[] dialogitem = {"Edit", "Print", "Test"};
+                final CharSequence[] dialogitem = {"Edit", "Print"};
                 dialog = new AlertDialog.Builder(listRfid.this);
                 dialog.setCancelable(true);
                 dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
@@ -277,8 +277,62 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
 
 
 
-    private void print(String idx){
+    private void print(final String idx){
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
 
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    success = jObj.getInt(TAG_SUCCESS);
+
+                    // Cek error node pada json
+                    if (success == 1) {
+                        Log.d("get edit data", jObj.toString());
+                        String idx     = jObj.getString(TAG_ID_RFID);
+                        String nox_telinga    = jObj.getString(TAG_no_tel);
+                        String namax_sapi  = jObj.getString(TAG_nama_sapi);
+                        String rasx_sapi = jObj.getString(TAG_ras_sapi);
+                        String tglx_lahir = jObj.getString(TAG_tgl_lahir);
+                        String statusx = jObj.getString(TAG_status);
+
+                        DialogForm(idx, nox_telinga,namax_sapi,rasx_sapi,tglx_lahir,statusx, "PRINT");
+
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(listRfid.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(listRfid.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters ke post url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_rfid", idx);
+
+                return params;
+            }
+
+        };
+
+        appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
     private void callData() {

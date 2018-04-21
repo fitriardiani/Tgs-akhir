@@ -6,4 +6,14 @@
         android:orderInCategory="100"
         android:title="Bluetooth"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_connect"
+        android:title="Connect To Bluetooth "
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_disconn"
+        android:title="Disconnect"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>

@@ -84,4 +84,5 @@ public class bluetooth extends AppCompatActivity {
         deviceList.setAdapter(adapter);
         deviceList.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
     }
+
 }

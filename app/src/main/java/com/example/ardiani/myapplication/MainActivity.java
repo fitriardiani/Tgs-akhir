@@ -7,6 +7,8 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -32,12 +35,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public static String EXTRA_ADDRESS = "device_address";
 
+    private Toolbar toolbar;
+    TextView textview;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case bluet.SUCCESS_CONNECT:
+                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
+                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+                    bluet.connectedThread.start();
+                    break;
+                case bluet.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    String strIncom = new String(readBuf);
+                    textview.append(strIncom);
+
+            }
+        }
+
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        bluet.gethandler(mHandler);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -48,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -78,6 +109,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, bluetooth.class);
             MainActivity.this.startActivity(intent);
             return true;
+        }
+        if (id==R.id.action_connect){
+            Intent intent = new Intent(MainActivity.this, bluet.class);
+            MainActivity.this.startActivity(intent);
+            return true;
+        }
+        if(id==R.id.action_disconn){
+            try {
+                bluet.connectedThread.cancel();
+                Toast.makeText(getApplicationContext(), "disconected !", Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "not connected !", Toast.LENGTH_LONG).show();
+            }
         }
 
         return super.onOptionsItemSelected(item);
