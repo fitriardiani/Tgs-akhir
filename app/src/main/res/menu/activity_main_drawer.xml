@@ -28,6 +28,10 @@
             android:id="@+id/nav_sehat"
             android:icon="@drawable/ic_add_to_queue_black_24dp"
             android:title="Data Kesehatan Sapi" />
+        <item
+            android:id="@+id/nav_tes"
+            android:icon="@drawable/ic_add_to_queue_black_24dp"
+            android:title="tes" />
 
     </group>
 

@@ -38,28 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     TextView textview;
 
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case bluet.SUCCESS_CONNECT:
-                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
-                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
-                    bluet.connectedThread.start();
-                    break;
-                case bluet.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    String strIncom = new String(readBuf);
-                    textview.append(strIncom);
-
-            }
-        }
-
-    };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        bluet.gethandler(mHandler);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -157,8 +134,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, menuKesehatan.class);
             MainActivity.this.startActivity(intent);
 
+        } else if (id == R.id.nav_tes) {
+            Intent intent = new Intent(MainActivity.this, tes.class);
+            MainActivity.this.startActivity(intent);
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

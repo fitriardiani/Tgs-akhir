@@ -40,7 +40,8 @@
         <activity android:name=".tambahKesehatan" />
         <activity android:name=".detilData" />
         <activity android:name=".coba" />
-        <activity android:name=".bluet"></activity>
+        <activity android:name=".bluet" />
+        <activity android:name=".tes"></activity>
     </application>
 
 </manifest>
