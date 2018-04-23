@@ -2,8 +2,12 @@ package com.example.ardiani.myapplication;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +41,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +65,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txtgl_periksa, txdiagnosa, txvaksin,txpetugas,txpengobatan;
     String  id_rfid, tgl_periksa,diagnosa, vaksin,petugas,pengobatan;
+    TextView textview;
 
     public static final String url_data = "http://peternakan.xyz/rd/data_kesehatan.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_kesehatan.php";
@@ -74,6 +84,28 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     public static final String TAG_SUCCESS="success";
 
     String tag_json_obj = "json_obj_req";
+    //MENGIRIM DATA READ/WRITE
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case bluet.SUCCESS_CONNECT:
+                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
+                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+                    bluet.connectedThread.start();
+                    break;
+                case bluet.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    String strIncom = new String(readBuf);
+                    textview.append(strIncom);
+
+            }
+        }
+
+    };
+
 
 
     @Override
@@ -82,6 +114,8 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
         setContentView(R.layout.activity_menu_kesehatan);
         btnTambah = (Button) findViewById(R.id.tambah);
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+
+        bluet.gethandler(mHandler);
 
         list_view = (ListView) findViewById(R.id.list_view);
 
@@ -406,8 +440,46 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
 
     }
     private void printer(){
+        String pesan = txid_rfid.getText().toString();
+        String pesan1= txtgl_periksa.getText().toString();
+        String pesan2 = txdiagnosa.getText().toString();
+        String pesan3 = txvaksin.getText().toString();
+        String pesan4 = txpengobatan.getText().toString();
+        txid_rfid.setText("");
+        txtgl_periksa.setText("");
+        txdiagnosa.setText("");
+        txvaksin.setText("");
+        txpengobatan.setText("");
+        kirim(pesan);
+        kirim(pesan1);
+        kirim(pesan2);
+        kirim(pesan3);
+        kirim(pesan4);
+    }
+
+    private void kirim(String data) {
+        if (bluet.connectedThread != null)
+            bluet.connectedThread.write(data);
+    }
+
+    private void write (String data, String namafile) {
+        File file = new File(Environment.getExternalStorageDirectory(),
+                namafile);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
 
 }
+
+
+
