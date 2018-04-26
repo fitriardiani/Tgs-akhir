@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="20dp"
+    android:background="#877054"
     tools:context="com.example.ardiani.myapplication.tambahInseminasi">
 
     <TextView
@@ -14,14 +15,15 @@
         android:text="Tambah Data Inseminasi"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:textColor="#2e98e2"
+        android:textColor="#040505"
         android:fontFamily="serif"/>
 
     <EditText
         android:id="@+id/editTextUid"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -34,7 +36,8 @@
         android:id="@+id/editTexttgl"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="155dp"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -47,7 +50,8 @@
         android:id="@+id/editTextKose"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="210dp"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -60,7 +64,8 @@
         android:id="@+id/editTextPetugas"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="265dp"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -71,18 +76,15 @@
 
     <Button
         android:id="@+id/btnTambah1"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/editTextPetugas"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/bg_login"
-        android:clickable="true"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Tambah"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="400dp"
+        android:background="#e2d1aa"
+        android:text="Tambah Data"
+        android:textSize="17sp"
         android:textAllCaps="false"
-        android:textColor="#D5D9D9"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

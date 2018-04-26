@@ -85,7 +85,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     public static final String TAG_VALUE = "value";
     public static final String TAG_SUCCESS="success";
 
-    TextView textview;
+    //TextView textview;
 
     String tag_json_obj = "json_obj_req";
 
@@ -104,7 +104,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    textview.append(strIncom);
+                   // textview.append(strIncom);
 
             }
         }
@@ -193,7 +193,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
                         String petugasx = jObj.getString(TAG_Petugas);
 
 
-                        DialogForm(idx, tanggalx_inseminasi,kodex_segmen,petugasx, "UPDATE");
+                        DialogForm(idx, tanggalx_inseminasi,kodex_segmen,petugasx, "Print");
 
                         adapter.notifyDataSetChanged();
 

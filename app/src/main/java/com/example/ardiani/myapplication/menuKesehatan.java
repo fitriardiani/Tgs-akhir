@@ -65,7 +65,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txtgl_periksa, txdiagnosa, txvaksin,txpetugas,txpengobatan;
     String  id_rfid, tgl_periksa,diagnosa, vaksin,petugas,pengobatan;
-    TextView textview;
+   // TextView textview;
 
     public static final String url_data = "http://peternakan.xyz/rd/data_kesehatan.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_kesehatan.php";
@@ -99,7 +99,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    textview.append(strIncom);
+                   // textview.append(strIncom);
 
             }
         }
@@ -342,7 +342,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
                         String pengobatanx =jObj.getString(TAG_pengobatan);
 
 
-                        DialogForm(idx, tglx_periksa,diagnosax,vaksinx,pengobatanx, "UPDATE");
+                        DialogForm(idx, tglx_periksa,diagnosax,vaksinx,pengobatanx, "PRINT");
 
                         adapter.notifyDataSetChanged();
 

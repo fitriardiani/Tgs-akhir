@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
@@ -38,6 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +65,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
     SwipeRefreshLayout swipe;
     ListView list_view;
     private Button btnTambah;
-    EditText txid_rfid, txnotelinga, txnamasapi, txrassapi, txtgllahir,txstatus;
+    EditText txid_rfid, txnotelinga, txnamasapi, txrassapi, txtgllahir, txstatus;
     String id_rfid, no_telinga, nama_sapi, ras_sapi, status, tgl_lahir;
 
     //public static String id_rfid_g = "";
@@ -68,19 +73,20 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
     public static final String url_data = "http://peternakan.xyz/rd/search_rfid.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_rfid.php";
     public static final String url_edit = "http://peternakan.xyz/rd/editRfid.php";
+    public static final String url_update = "http://peternakan.xyz/rd/update.php";
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String TAG_ID_RFID = "id_rfid";
-    public static final String TAG_no_tel ="no_telinga";
-    public static final String TAG_nama_sapi="nama_sapi";
-    public static final String TAG_ras_sapi="ras_sapi";
-    public static final String TAG_tgl_lahir="tgl_lahir";
-    public static final String TAG_status="status";
+    public static final String TAG_no_tel = "no_telinga";
+    public static final String TAG_nama_sapi = "nama_sapi";
+    public static final String TAG_ras_sapi = "ras_sapi";
+    public static final String TAG_tgl_lahir = "tgl_lahir";
+    public static final String TAG_status = "status";
     public static final String TAG_RESULTS = "results";
     public static final String TAG_MESSAGE = "message";
     public static final String TAG_VALUE = "value";
-    public static final String TAG_SUCCESS="success";
+    public static final String TAG_SUCCESS = "success";
     public static final String EMP_ID = "emp_id";
 
     String tag_json_obj = "json_obj_req";
@@ -106,7 +112,6 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         }
 
     };
-
 
 
     @Override
@@ -146,18 +151,15 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
             public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
 
                 final String idx = listData.get(position).getId_rfid();
-                final CharSequence[] dialogitem = {"Edit", "Print"};
+                final CharSequence[] dialogitem = {"PRINT"};
                 dialog = new AlertDialog.Builder(listRfid.this);
                 dialog.setCancelable(true);
-                dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
-                {
+                dialog.setItems(dialogitem, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which){
+                    public void onClick(DialogInterface dialog, int which) {
                         //TODO Auto-generated method stub
-                        switch (which){
+                        switch (which) {
                             case 0:
-                                edit(idx);
-                            case 1:
                                 print(idx);
                                 break;
 
@@ -172,7 +174,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         });
     }
 
-    private void kosong(){
+    private void kosong() {
         txid_rfid.setText(null);
         txnotelinga.setText(null);
         txnamasapi.setText(null);
@@ -182,68 +184,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
 
     }
 
-    private void edit(final String idx){
-
-        StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
-
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Response: " + response.toString());
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    success = jObj.getInt(TAG_SUCCESS);
-
-                    // Cek error node pada json
-                    if (success == 1) {
-                        Log.d("get edit data", jObj.toString());
-                        String idx     = jObj.getString(TAG_ID_RFID);
-                        String nox_telinga    = jObj.getString(TAG_no_tel);
-                        String namax_sapi  = jObj.getString(TAG_nama_sapi);
-                        String rasx_sapi = jObj.getString(TAG_ras_sapi);
-                        String tglx_lahir = jObj.getString(TAG_tgl_lahir);
-                        String statusx = jObj.getString(TAG_status);
-
-                        DialogForm(idx, nox_telinga,namax_sapi,rasx_sapi,tglx_lahir,statusx, "UPDATE");
-
-                        adapter.notifyDataSetChanged();
-
-                    } else {
-                        Toast.makeText(listRfid.this, jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(listRfid.this, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters ke post url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id_rfid", idx);
-
-                return params;
-            }
-
-        };
-
-        appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
-    }
-
-
-
-    private void DialogForm(String idx, String nox_tel, String namax_sapi, final String rasx_sapi, String tglx_lahir, String statusx, String Button){
+    private void DialogForm(String idx, String nox_tel, String namax_sapi, final String rasx_sapi, String tglx_lahir, String statusx, String Button) {
         dialog = new AlertDialog.Builder(listRfid.this);
         inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.form_rfid, null);
@@ -252,14 +193,14 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         dialog.setIcon(R.mipmap.ic_launcher);
         dialog.setTitle("Form Data");
 
-        txid_rfid      = (EditText) dialogView.findViewById(R.id.txt_id);
-        txnotelinga    = (EditText) dialogView.findViewById(R.id.txt_nomor_telinga);
+        txid_rfid = (EditText) dialogView.findViewById(R.id.txt_id);
+        txnotelinga = (EditText) dialogView.findViewById(R.id.txt_nomor_telinga);
         txnamasapi = (EditText) dialogView.findViewById(R.id.txt_nama_sapi);
-        txrassapi      = (EditText) dialogView.findViewById(R.id.txt_ras_sapi);
-        txtgllahir   = (EditText) dialogView.findViewById(R.id.txt_tgl_lahir);
-        txstatus  = (EditText) dialogView.findViewById(R.id.txt_stt);
+        txrassapi = (EditText) dialogView.findViewById(R.id.txt_ras_sapi);
+        txtgllahir = (EditText) dialogView.findViewById(R.id.txt_tgl_lahir);
+        txstatus = (EditText) dialogView.findViewById(R.id.txt_stt);
 
-        if (!idx.isEmpty()){
+        if (!idx.isEmpty()) {
             txid_rfid.setText(idx);
             txnotelinga.setText(nox_tel);
             txnamasapi.setText(namax_sapi);
@@ -274,14 +215,14 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                id_rfid      = txid_rfid.getText().toString();
-                no_telinga    = txnotelinga.getText().toString();
-                nama_sapi  = txnamasapi.getText().toString();
+                id_rfid = txid_rfid.getText().toString();
+                no_telinga = txnotelinga.getText().toString();
+                nama_sapi = txnamasapi.getText().toString();
                 ras_sapi = txrassapi.getText().toString();
                 tgl_lahir = txtgllahir.getText().toString();
                 status = txstatus.getText().toString();
 
-                simpan_update();
+                cetak();
                 dialog.dismiss();
             }
         });
@@ -297,12 +238,6 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
 
         dialog.show();
     }
-
-    private void simpan_update(){
-
-    }
-
-
 
     private void print(final String idx){
         StringRequest strReq = new StringRequest(Request.Method.POST, url_edit, new Response.Listener<String>() {
@@ -516,4 +451,45 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
         appControler.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
     //ArrayList<String> id_rfid = new ArrayList<String>();
+
+    private void cetak(){
+        String pesan = txid_rfid.getText().toString();
+        String pesan1 = txnotelinga.getText().toString();
+        String pesan2 = txnamasapi.getText().toString();
+        String pesan3 = txrassapi.getText().toString();
+        String pesan4 = txtgllahir.getText().toString();
+        String pesan5 = txstatus.getText().toString();
+        txid_rfid.setText("");
+        txnotelinga.setText("");
+        txnamasapi.setText("");
+        txrassapi.setText("");
+        txtgllahir.setText("");
+        txstatus.setText("");
+        kirim(pesan);
+        kirim(pesan1);
+        kirim(pesan2);
+        kirim(pesan3);
+        kirim(pesan4);
+        kirim(pesan5);
+    }
+
+    private void kirim(String data) {
+        if (bluet.connectedThread != null)
+            bluet.connectedThread.write(data);
+    }
+
+    private void write (String data, String namafile) {
+        File file = new File(Environment.getExternalStorageDirectory(),
+                namafile);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

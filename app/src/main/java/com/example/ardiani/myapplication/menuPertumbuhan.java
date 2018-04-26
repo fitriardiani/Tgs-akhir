@@ -104,7 +104,7 @@ public class menuPertumbuhan extends AppCompatActivity implements  SwipeRefreshL
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    textview.append(strIncom);
+                    //textview.append(strIncom);
 
             }
         }
@@ -349,7 +349,7 @@ public class menuPertumbuhan extends AppCompatActivity implements  SwipeRefreshL
                         String petugasx = jObj.getString(TAG_Petugas);
 
 
-                        DialogForm(idx, tglx_ukur,beratx,umurx,petugasx, "UPDATE");
+                        DialogForm(idx, tglx_ukur,beratx,umurx,petugasx, "PRINT");
 
                         adapter.notifyDataSetChanged();
 

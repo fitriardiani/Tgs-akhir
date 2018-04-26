@@ -72,7 +72,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txxtgl_lahir, tketerangan, txjenis_kelamin,txpetugas;
     String  id_rfid, tgl_lahir,keterangan, jenis_kelamin,petugas;
-    TextView textview;
+    //TextView textview;
 
     //private static BluetoothSocket btsocket;
     //private static OutputStream outputStream;
@@ -112,7 +112,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    textview.append(strIncom);
+                    //textview.append(strIncom);
 
             }
         }

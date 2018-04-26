@@ -66,7 +66,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         int success;
         EditText txid_rfid, txxtgl_memiliki, txnama_pemiilik, txkepemilikan_ke;
         String  id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke;
-        TextView textview;
+        //TextView textview;
 
         public static final String url_data = "http://peternakan.xyz/rd/data_pemilik.php";
         public static final String url_cari = "http://peternakan.xyz/rd/cari_pemilik.php";
@@ -100,7 +100,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                 case bluet.MESSAGE_READ:
                                         byte[] readBuf = (byte[]) msg.obj;
                                         String strIncom = new String(readBuf);
-                                        textview.append(strIncom);
+                                        //textview.append(strIncom);
 
                         }
                 }
@@ -338,7 +338,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                                 String kepemilikanx_ke = jObj.getString(Tag_Pemilikke);
 
 
-                                                DialogForm(idx, tanggalx_memiliki,namax_pemilik,kepemilikanx_ke, "UPDATE");
+                                                DialogForm(idx, tanggalx_memiliki,namax_pemilik,kepemilikanx_ke, "PRINT");
 
                                                 adapter.notifyDataSetChanged();
 

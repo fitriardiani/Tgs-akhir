@@ -41,7 +41,8 @@
         <activity android:name=".detilData" />
         <activity android:name=".coba" />
         <activity android:name=".bluet" />
-        <activity android:name=".tes"></activity>
+        <activity android:name=".tes" />
+        <activity android:name=".ganti_tag"></activity>
     </application>
 
 </manifest>

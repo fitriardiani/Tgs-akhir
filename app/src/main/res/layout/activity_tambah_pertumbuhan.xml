@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
+    android:background="#877054"
     tools:context="com.example.ardiani.myapplication.tambahPertumbuhan">
 
     <TextView
@@ -13,18 +14,19 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="serif"
         android:text="Tambah Data Pertumbuhan \nSapi"
         android:textAlignment="center"
-        android:textColor="#2e98e2"
+        android:textColor="#0d1012"
         android:textSize="20dp" />
 
     <EditText
         android:id="@+id/editTextUidRfid"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="80dp"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -35,9 +37,10 @@
 
     <EditText
         android:id="@+id/editTexttanggal"
+        android:background="@android:drawable/editbox_background_normal"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="135dp"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
@@ -50,47 +53,50 @@
         android:id="@+id/editTextumur"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="190dp"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
         android:inputType="text"
         android:hint="Umur Sapi"
         android:textColorHint="#054D44"
-        android:fontFamily="sans-serif" />
+        android:fontFamily="sans-serif"
+        android:background="@android:drawable/editbox_background_normal"/>
 
     <EditText
         android:id="@+id/editTextBerat"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="245dp"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
         android:inputType="text"
         android:hint="Berat Sapi"
         android:textColorHint="#054D44"
-        android:fontFamily="sans-serif" />
+        android:fontFamily="sans-serif"
+        android:background="@android:drawable/editbox_background_normal" />
 
     <EditText
         android:id="@+id/editTextPtgs"
         android:layout_width="360dp"
         android:layout_height="50dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="300dp"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ems="10"
         android:inputType="text"
         android:hint="Petugas"
         android:textColorHint="#054D44"
-        android:fontFamily="sans-serif" />
+        android:fontFamily="sans-serif"
+        android:background="@android:drawable/editbox_background_normal" />
 
     <Button
         android:id="@+id/btn_tambah"
-        android:layout_width="300dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_marginTop="360dp"
-        android:background="#1679b3"
+        android:layout_marginTop="400dp"
+        android:background="#e2d1aa"
         android:text="Tambah Data"
         android:textSize="17sp"
         android:textAllCaps="false"
