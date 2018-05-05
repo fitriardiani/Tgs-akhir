@@ -5,15 +5,16 @@ package com.example.ardiani.myapplication.model;
  */
 
 public class DataModelPemilik {
-    private  String id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke;
+    private  String id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke, alamat;
 
     public DataModelPemilik(){
     }
-    public DataModelPemilik (String id_rfid, String tgl_memiliki, String nama_pemilik,String kepemilikan_ke){
+    public DataModelPemilik (String id_rfid, String tgl_memiliki, String nama_pemilik,String kepemilikan_ke, String alamat){
         this.id_rfid = id_rfid;
         this.tgl_memiliki = tgl_memiliki;
         this.nama_pemilik = nama_pemilik;
         this.kepemilikan_ke = kepemilikan_ke;
+        this.alamat = alamat;
     }
 
     public String getId_rfid() {
@@ -47,4 +48,13 @@ public class DataModelPemilik {
     public void setKepemilikan_ke(String kepemilikan_ke) {
         this.kepemilikan_ke = kepemilikan_ke;
     }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String kepemilikan_ke) {
+        this.alamat = kepemilikan_ke;
+    }
+
 }

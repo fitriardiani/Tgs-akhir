@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
-    android:background="#877054"
+    android:background="#49b2cf"
     tools:context="com.example.ardiani.myapplication.tambahKesehatan">
 
 

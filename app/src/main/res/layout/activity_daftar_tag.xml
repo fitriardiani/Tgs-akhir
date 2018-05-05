@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#877054"
+    android:background="#49b2cf"
     tools:context="com.example.ardiani.myapplication.daftarTag">
 
     <TextView

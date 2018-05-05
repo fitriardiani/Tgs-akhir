@@ -48,7 +48,7 @@ public class tambahKepemilikan extends AppCompatActivity implements View.OnClick
         final String nama_pemilik = txNamaPemilik.getText().toString().trim();
         final String alamat = txalamat.getText().toString().trim();
         final String tgl_memiliki = txtglmilik.getText().toString().trim();
-        final String pemilik_ke = txke.getText().toString().trim();
+        final String kepemilikan_ke = txke.getText().toString().trim();
         final String id_rfid = txrfid.getText().toString().trim();
 
         progressDialog.setMessage("Submitting Data...");
@@ -86,7 +86,7 @@ public class tambahKepemilikan extends AppCompatActivity implements View.OnClick
                 params.put("alamat", alamat);
                 params.put("tgl_memiliki", tgl_memiliki);
                 params.put("id_rfid", id_rfid);
-                params.put("pemilik_ke", pemilik_ke);
+                params.put("kepemilikan_ke", kepemilikan_ke);
                 return  params;
             }
         };

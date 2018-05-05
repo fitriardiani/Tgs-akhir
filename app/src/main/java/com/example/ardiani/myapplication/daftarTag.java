@@ -27,7 +27,7 @@ public class daftarTag extends AppCompatActivity implements View.OnClickListener
     private EditText txrfid,txnotel,txnama,txtgl,txras,txstatus;
     private Button btnTambah;
     private ProgressDialog progressDialog;
-    private String host ="http://192.168.1.22/record/registerRfid.php";
+    private String host ="http://peternakan.xyz/rd/registerRfid.php";
 
 
     @Override

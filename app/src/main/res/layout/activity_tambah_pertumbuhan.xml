@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
-    android:background="#877054"
+    android:background="#49b2cf"
     tools:context="com.example.ardiani.myapplication.tambahPertumbuhan">
 
     <TextView
@@ -96,7 +96,7 @@
         android:layout_width="180dp"
         android:layout_height="50dp"
         android:layout_marginTop="400dp"
-        android:background="#e2d1aa"
+        android:background="#baa67a"
         android:text="Tambah Data"
         android:textSize="17sp"
         android:textAllCaps="false"

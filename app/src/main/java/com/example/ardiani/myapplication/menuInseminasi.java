@@ -48,6 +48,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,28 +89,6 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     //TextView textview;
 
     String tag_json_obj = "json_obj_req";
-
-    //MENGIRIM DATA READ/WRITE
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case bluet.SUCCESS_CONNECT:
-                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
-                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
-                    bluet.connectedThread.start();
-                    break;
-                case bluet.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    String strIncom = new String(readBuf);
-                   // textview.append(strIncom);
-
-            }
-        }
-
-    };
 
 
     @Override
@@ -291,9 +270,9 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
         String pesan2 = txkode_segmen.getText().toString();
         String pesan3 = txpetugas.getText().toString();
         txid_rfid.setText("");
-        tx_tglinseminasi.setText("");
-        txkode_segmen.setText("");
-        txpetugas.setText("");
+        tx_tglinseminasi.setText("/n");
+        txkode_segmen.setText("/n");
+        txpetugas.setText("/n");
         kirim(pesan);
         kirim(pesan1);
         kirim(pesan2);
@@ -379,6 +358,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
         cariData(query);
         return false;
     }
@@ -398,6 +378,28 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
         searchView.setOnQueryTextListener(this);
         return true;
     }
+    //MENGIRIM DATA READ/WRITE
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case bluet.SUCCESS_CONNECT:
+                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
+                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+                    bluet.connectedThread.start();
+                    break;
+                case bluet.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    String strIncom = new String(readBuf);
+                    //.append(strIncom);
+
+            }
+        }
+
+    };
+
 
     private void cariData(final String keyword) {
         pDialog = new ProgressDialog(menuInseminasi.this);

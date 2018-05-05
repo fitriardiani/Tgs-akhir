@@ -112,7 +112,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    //textview.append(strIncom);
+                    //type_name.append(strIncom);
 
             }
         }

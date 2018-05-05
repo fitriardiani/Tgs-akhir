@@ -64,8 +64,8 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         View dialogView;
         LayoutInflater inflater;
         int success;
-        EditText txid_rfid, txxtgl_memiliki, txnama_pemiilik, txkepemilikan_ke;
-        String  id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke;
+        EditText txid_rfid, txxtgl_memiliki, txnama_pemiilik, txkepemilikan_ke,tx_alamat;
+        String  id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke,alamat;
         //TextView textview;
 
         public static final String url_data = "http://peternakan.xyz/rd/data_pemilik.php";
@@ -78,6 +78,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         public static final String TAG_Nama_Pemilik= "nama_pemilik";
         public static final String TAG_tgl_memilki = "tgl_memiliki";
         public static final String Tag_Pemilikke = "kepemilikan_ke";
+        public static final String Tag_alamat = "alamat";
         public static final String TAG_RESULTS = "results";
         public static final String TAG_MESSAGE = "message";
         public static final String TAG_VALUE = "value";
@@ -188,7 +189,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
 
                         item.setId_rfid(obj.getString(TAG_ID_RFID));
                         item.setNama_pemilik(obj.getString(TAG_Nama_Pemilik));
-
+                        item.setAlamat(obj.getString(Tag_alamat));
                         item.setTgl_memiliki(obj.getString(TAG_tgl_memilki));
                         item.setKepemilikan_ke(obj.getString(Tag_Pemilikke));
 
@@ -336,9 +337,10 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                                 String tanggalx_memiliki    = jObj.getString(TAG_tgl_memilki);
                                                 String namax_pemilik  = jObj.getString(TAG_Nama_Pemilik);
                                                 String kepemilikanx_ke = jObj.getString(Tag_Pemilikke);
+                                                String alamatx = jObj.getString(Tag_alamat);
 
 
-                                                DialogForm(idx, tanggalx_memiliki,namax_pemilik,kepemilikanx_ke, "PRINT");
+                                                DialogForm(idx, tanggalx_memiliki,namax_pemilik,kepemilikanx_ke,alamatx, "PRINT");
 
                                                 adapter.notifyDataSetChanged();
 
@@ -375,7 +377,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         }
 
         //menampilkan kotak dialog form
-        private void DialogForm(String idx, String tanggalx_memiliki, final String namax_pemilik, String kepemilikanx_ke, String Button){
+        private void DialogForm(String idx, String tanggalx_memiliki, final String namax_pemilik, final String alamatx, String kepemilikanx_ke, String Button){
                 dialog = new AlertDialog.Builder(menuKepemilikan.this);
                 inflater = getLayoutInflater();
                 dialogView = inflater.inflate(R.layout.form_pemilik, null);
@@ -388,12 +390,14 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                 txxtgl_memiliki   = (EditText) dialogView.findViewById(R.id.txt_tgl_memiliki);
                 txnama_pemiilik = (EditText) dialogView.findViewById(R.id.txt_nama_pemilik);
                 txkepemilikan_ke     = (EditText) dialogView.findViewById(R.id.txt_pemilikke);
+                tx_alamat =(EditText) dialogView.findViewById(R.id.txt_alamat);
 
                 if (!idx.isEmpty()){
                         txid_rfid.setText(idx);
                         txxtgl_memiliki.setText(tanggalx_memiliki);
                         txnama_pemiilik.setText(namax_pemilik);
                         txkepemilikan_ke.setText(kepemilikanx_ke);
+                        tx_alamat.setText(alamatx);
                 } else {
                         kosong();
                 }
@@ -406,6 +410,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                 tgl_memiliki    = txxtgl_memiliki.getText().toString();
                                 nama_pemilik  = txnama_pemiilik.getText().toString();
                                 kepemilikan_ke = txkepemilikan_ke.getText().toString();
+                                alamat = tx_alamat.getText().toString();
 
                                 printer();
                                 dialog.dismiss();
@@ -436,14 +441,17 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                 String pesan1= txxtgl_memiliki.getText().toString();
                 String pesan2 = txnama_pemiilik.getText().toString();
                 String pesan3 = txkepemilikan_ke.getText().toString();
+                String pesan4 = tx_alamat.getText().toString();
                 txid_rfid.setText("");
                 txxtgl_memiliki.setText("");
                 txnama_pemiilik.setText("");
                 txkepemilikan_ke.setText("");
+                tx_alamat.setText("");
                 kirim(pesan);
                 kirim(pesan1);
                 kirim(pesan2);
                 kirim(pesan3);
+                kirim(pesan4);
         }
 
         private void kirim(String data) {

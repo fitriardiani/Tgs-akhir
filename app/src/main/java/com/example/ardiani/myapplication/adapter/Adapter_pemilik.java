@@ -59,11 +59,13 @@ public class Adapter_pemilik extends BaseAdapter {
         TextView txt_tgl_memiliki = (TextView) convertView.findViewById(R.id.txt_tgl_memiliki);
         TextView txt_nama_pemilik = (TextView) convertView.findViewById(R.id.txt_nama_pemilik);
         TextView txt_kepemilikan_ke = (TextView) convertView.findViewById(R.id.txt_pemilikke);
+        TextView txt_alamat = (TextView) convertView.findViewById(R.id.txt_alamat);
 
         txt_id_rfid.setText(item.get(position).getId_rfid());
         txt_tgl_memiliki.setText(item.get(position).getTgl_memiliki());
         txt_nama_pemilik.setText(item.get(position).getNama_pemilik());
         txt_kepemilikan_ke.setText(item.get(position).getKepemilikan_ke());
+        txt_alamat.setText(item.get(position).getAlamat());
 
         DataModelPemilik data = item.get(position);
 
@@ -71,6 +73,7 @@ public class Adapter_pemilik extends BaseAdapter {
         txt_tgl_memiliki.setText(data.getTgl_memiliki());
         txt_nama_pemilik.setText(data.getNama_pemilik());
         txt_kepemilikan_ke.setText(data.getKepemilikan_ke());
+        txt_alamat.setText(data.getAlamat());
 
 
         return convertView;

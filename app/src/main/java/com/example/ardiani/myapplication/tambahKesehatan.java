@@ -27,7 +27,7 @@ public class tambahKesehatan extends AppCompatActivity implements View.OnClickLi
     EditText txTglPeriksa, txDiagnosa,txVaksin,txObat,txIdRfid;
     private Button btnRegister;
     private ProgressDialog progressDialog;
-    private String host ="http://peternakan.xyz/rd/registSehat.php";
+    private String host ="http://peternakan.xyz/rd/regisrtSehat.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +87,8 @@ public class tambahKesehatan extends AppCompatActivity implements View.OnClickLi
                 params.put("tgl_periksa", tgl_periksa);
                 params.put("diagnosa", diagnosa);
                 params.put("vaksin", vaksin);
-                params.put("id_rfid", id_rfid);
                 params.put("pengobatan", pengobatan);
+                params.put("id_rfid", id_rfid);
                 return  params;
             }
         };
