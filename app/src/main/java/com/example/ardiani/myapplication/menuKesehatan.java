@@ -1,5 +1,6 @@
 package com.example.ardiani.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
@@ -65,7 +66,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txtgl_periksa, txdiagnosa, txvaksin,txpetugas,txpengobatan;
     String  id_rfid, tgl_periksa,diagnosa, vaksin,petugas,pengobatan;
-   // TextView textview;
+    SearchView searchViewx;
 
     public static final String url_data = "http://peternakan.xyz/rd/data_kesehatan.php";
     public static final String url_cari = "http://peternakan.xyz/rd/cari_kesehatan.php";
@@ -85,6 +86,7 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
 
     String tag_json_obj = "json_obj_req";
     //MENGIRIM DATA READ/WRITE
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -99,11 +101,11 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                   // textview.append(strIncom);
-
+                    strIncom = strIncom.trim();
+                    //try{
+                    searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
             }
         }
-
     };
 
 
@@ -237,10 +239,11 @@ public class menuKesehatan extends AppCompatActivity implements SwipeRefreshLayo
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint(getString(R.string.type_name));
-        searchView.setIconified(true);
-        searchView.setOnQueryTextListener(this);
+        //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchViewx = (SearchView)MenuItemCompat.getActionView(item);
+        searchViewx.setQueryHint(getString(R.string.type_name));
+        searchViewx.setIconified(true);
+        searchViewx.setOnQueryTextListener(this);
         return true;
     }
 

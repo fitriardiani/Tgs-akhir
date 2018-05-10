@@ -1,5 +1,6 @@
 package com.example.ardiani.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
@@ -66,7 +67,8 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         int success;
         EditText txid_rfid, txxtgl_memiliki, txnama_pemiilik, txkepemilikan_ke,tx_alamat;
         String  id_rfid, tgl_memiliki, nama_pemilik, kepemilikan_ke,alamat;
-        //TextView textview;
+        SearchView searchViewx;
+
 
         public static final String url_data = "http://peternakan.xyz/rd/data_pemilik.php";
         public static final String url_cari = "http://peternakan.xyz/rd/cari_pemilik.php";
@@ -87,6 +89,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         String tag_json_obj = "json_obj_req";
 
         //MENGIRIM DATA READ/WRITE
+        @SuppressLint("HandlerLeak")
         Handler mHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
@@ -101,12 +104,13 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                 case bluet.MESSAGE_READ:
                                         byte[] readBuf = (byte[]) msg.obj;
                                         String strIncom = new String(readBuf);
-                                        //textview.append(strIncom);
-
+                                        strIncom = strIncom.trim();
+                                        //try{
+                                        searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
                         }
                 }
-
         };
+
 
 
         @Override
@@ -238,14 +242,15 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
 
         @Override
         public boolean onCreateOptionsMenu(android.view.Menu menu) {
-            getMenuInflater().inflate(R.menu.main_menu, menu);
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-                searchView.setQueryHint(getString(R.string.type_name));
-                searchView.setIconified(true);
-                searchView.setOnQueryTextListener(this);
+                getMenuInflater().inflate(R.menu.main_menu, menu);
+                final MenuItem item = menu.findItem(R.id.action_search);
+                //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+                searchViewx = (SearchView)MenuItemCompat.getActionView(item);
+                searchViewx.setQueryHint(getString(R.string.type_name));
+                searchViewx.setIconified(true);
+                searchViewx.setOnQueryTextListener(this);
                 return true;
-                }
+        }
 
         private void cariData(final String keyword) {
                 pDialog = new ProgressDialog(menuKepemilikan.this);

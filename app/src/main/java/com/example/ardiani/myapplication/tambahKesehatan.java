@@ -2,6 +2,9 @@ package com.example.ardiani.myapplication;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothSocket;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +31,28 @@ public class tambahKesehatan extends AppCompatActivity implements View.OnClickLi
     private Button btnRegister;
     private ProgressDialog progressDialog;
     private String host ="http://peternakan.xyz/rd/regisrtSehat.php";
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case bluet.SUCCESS_CONNECT:
+                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
+                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+                    bluet.connectedThread.start();
+                    break;
+                case bluet.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    String strIncom = new String(readBuf);
+                    txIdRfid.append(strIncom);
+
+            }
+        }
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

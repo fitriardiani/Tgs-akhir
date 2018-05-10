@@ -1,6 +1,7 @@
 package com.example.ardiani.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -160,6 +161,7 @@ public class bluet extends Activity implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         // TODO Auto-generated method stub
+        ProgressDialog pg = ProgressDialog.show(bluet.this,"","Loading");
         if (btAdapter.isDiscovering()) {
             btAdapter.cancelDiscovery();
         }
@@ -171,6 +173,7 @@ public class bluet extends Activity implements AdapterView.OnItemClickListener {
         } else {
             Toast.makeText(getApplicationContext(), "device is not paired", Toast.LENGTH_SHORT).show();
         }
+        pg.dismiss();
     }
 
     private class ConnectThread extends Thread {

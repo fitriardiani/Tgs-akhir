@@ -23,8 +23,8 @@
             android:layout_marginLeft="21dp"
             android:layout_marginStart="21dp"
             android:alpha="0.8"
-            android:text="Daftar Data \nKesehatan"
-            android:textSize="19dp"
+            android:text="@string/daftar_data"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
         <Button
@@ -36,8 +36,8 @@
             android:layout_alignParentTop="true"
             android:fontFamily="sans-serif-condensed"
             android:textColor="@color/colorPrimaryDark"
-            android:text="Tambah Data"
-            android:textSize="15dp"
+            android:text="@string/tambah_data"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <ListView

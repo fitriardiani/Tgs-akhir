@@ -67,6 +67,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
     private Button btnTambah;
     EditText txid_rfid, txnotelinga, txnamasapi, txrassapi, txtgllahir, txstatus;
     String id_rfid, no_telinga, nama_sapi, ras_sapi, status, tgl_lahir;
+    SearchView searchViewx;
 
     //public static String id_rfid_g = "";
 
@@ -106,11 +107,11 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    //textview.append(strIncom);
-
+                    strIncom = strIncom.trim();
+                    //try{
+                    searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
             }
         }
-
     };
 
 
@@ -369,10 +370,11 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint(getString(R.string.type_name));
-        searchView.setIconified(true);
-        searchView.setOnQueryTextListener(this);
+        //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchViewx = (SearchView)MenuItemCompat.getActionView(item);
+        searchViewx.setQueryHint(getString(R.string.type_name));
+        searchViewx.setIconified(true);
+        searchViewx.setOnQueryTextListener(this);
         return true;
     }
 

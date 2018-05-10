@@ -1,6 +1,10 @@
 package com.example.ardiani.myapplication;
 
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothSocket;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +23,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +36,44 @@ public class daftarTag extends AppCompatActivity implements View.OnClickListener
     private Button btnTambah;
     private ProgressDialog progressDialog;
     private String host ="http://peternakan.xyz/rd/registerRfid.php";
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case bluet.SUCCESS_CONNECT:
+                    bluet.connectedThread = new bluet.ConnectedThread((BluetoothSocket) msg.obj);
+                    Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+                    bluet.connectedThread.start();
+                    break;
+                case bluet.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    String strIncom = new String(readBuf);
+                    txrfid.append(strIncom);
+
+            }
+        }
+
+    };
+
+    private void write (String data, String namafile) {
+        File file = new File(Environment.getExternalStorageDirectory(),
+                namafile);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
     @Override

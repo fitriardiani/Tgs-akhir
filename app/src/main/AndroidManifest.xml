@@ -39,10 +39,9 @@
         <activity android:name=".menuKesehatan" />
         <activity android:name=".tambahKesehatan" />
         <activity android:name=".detilData" />
-        <activity android:name=".coba" />
         <activity android:name=".bluet" />
         <activity android:name=".tes" />
-        <activity android:name=".ganti_tag"></activity>
+        <activity android:name=".ganti_tag" />
     </application>
 
 </manifest>

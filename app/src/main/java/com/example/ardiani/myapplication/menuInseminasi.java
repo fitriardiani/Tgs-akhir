@@ -1,5 +1,6 @@
 package com.example.ardiani.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
@@ -69,6 +70,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     int success;
     EditText txid_rfid, tx_tglinseminasi, txkode_segmen, txpetugas;
     String  id_rfid, tanggal_inseminasi, kode_segmen, petugas;
+    SearchView searchViewx;
     //public static String id_rfid_g = "";
 
     public static final String url_data = "http://peternakan.xyz/rd/data_inseminasi.php";
@@ -96,6 +98,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_inseminasi);
         list_view = (ListView) findViewById(R.id.list_view);
+        //searchViewx = findViewById(R.id.searchView);
 
         bluet.gethandler(mHandler);
 
@@ -157,7 +160,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Response: " + response.toString());
+                Log.d(TAG, "Response: " + response);
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -372,13 +375,15 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint(getString(R.string.type_name));
-        searchView.setIconified(true);
-        searchView.setOnQueryTextListener(this);
+        //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchViewx = (SearchView)MenuItemCompat.getActionView(item);
+        searchViewx.setQueryHint(getString(R.string.type_name));
+        searchViewx.setIconified(true);
+        searchViewx.setOnQueryTextListener(this);
         return true;
     }
     //MENGIRIM DATA READ/WRITE
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -393,11 +398,11 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    //.append(strIncom);
-
+                    strIncom = strIncom.trim();
+                    //try{
+                    searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
             }
         }
-
     };
 
 
@@ -411,7 +416,7 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
 
             @Override
             public void onResponse(String response) {
-                Log.e("Response: ", response.toString());
+                Log.e("Response: ", response);
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -461,9 +466,9 @@ public class menuInseminasi extends AppCompatActivity  implements SwipeRefreshLa
         }) {
 
             @Override
-            protected Map<String, String> getParams() {
+            protected Map <String, String> getParams() {
                 // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("keyword", keyword);
 
                 return params;

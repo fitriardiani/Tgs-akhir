@@ -1,5 +1,6 @@
 package com.example.ardiani.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
@@ -15,32 +16,24 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.ardiani.myapplication.adapter.Adapter_lahir;
-import com.example.ardiani.myapplication.adapter.Adapter_tumbuh;
 import com.example.ardiani.myapplication.app.appControler;
 import com.example.ardiani.myapplication.model.DataModelLahir;
-import com.example.ardiani.myapplication.model.DataModelTumbuh;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +43,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +64,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     int success;
     EditText txid_rfid, txxtgl_lahir, tketerangan, txjenis_kelamin,txpetugas;
     String  id_rfid, tgl_lahir,keterangan, jenis_kelamin,petugas;
+    SearchView searchViewx;
     //TextView textview;
 
     //private static BluetoothSocket btsocket;
@@ -86,7 +79,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String TAG_ID_RFID = "id_rfid";
-    public static final String TAG_Tgl_lahir = "tgl_lahir";
+    public static final String TAG_TGL_LAHIR = "tgl_lahir";
     public static final String TAG_Keterangan = "keterangan";
     public static final String Tag_Jenis_kelamin = "jenis_kelamin";
     public static final String Tag_Petugas = "petugas";
@@ -98,6 +91,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     String tag_json_obj = "json_obj_req";
 
     //MENGIRIM DATA READ/WRITE
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -112,14 +106,12 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                 case bluet.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String strIncom = new String(readBuf);
-                    //type_name.append(strIncom);
-
+                    strIncom = strIncom.trim();
+                    //try{
+                    searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
             }
         }
-
     };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +196,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                         item.setId_rfid(obj.getString(TAG_ID_RFID));
                         item.setPetugas(obj.getString(Tag_Petugas));
 
-                        item.setTgl_lahir(obj.getString(TAG_Tgl_lahir));
+                        item.setTgl_lahir(obj.getString(TAG_TGL_LAHIR));
                         item.setJenis_kelamin(obj.getString(Tag_Jenis_kelamin));
                         item.setKeterangan(obj.getString((TAG_Keterangan)));
 
@@ -253,10 +245,11 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setQueryHint(getString(R.string.type_name));
-        searchView.setIconified(true);
-        searchView.setOnQueryTextListener(this);
+        //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchViewx = (SearchView)MenuItemCompat.getActionView(item);
+        searchViewx.setQueryHint(getString(R.string.type_name));
+        searchViewx.setIconified(true);
+        searchViewx.setOnQueryTextListener(this);
         return true;
     }
 
@@ -290,7 +283,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                             DataModelLahir data = new DataModelLahir();
 
                             data.setId_rfid(obj.getString(TAG_ID_RFID));
-                            data.setTgl_lahir(obj.getString(TAG_Tgl_lahir));
+                            data.setTgl_lahir(obj.getString(TAG_TGL_LAHIR));
                             data.setKeterangan(obj.optString(TAG_Keterangan));
                             data.setPetugas(obj.getString(TAG_Petugas));
                             data.setJenis_kelamin(obj.getString(Tag_Jenis_kelamin));
@@ -352,7 +345,7 @@ public class menuKelahiran extends AppCompatActivity implements SwipeRefreshLayo
                     if (success == 1) {
                         Log.d("get edit data", jObj.toString());
                         String idx     = jObj.getString(TAG_ID_RFID);
-                        String tglx_lahir    = jObj.getString(TAG_Tgl_lahir);
+                        String tglx_lahir    = jObj.getString(TAG_TGL_LAHIR);
                         String jenisx_kelamin  = jObj.getString(Tag_Jenis_kelamin);
                         String keteranganx = jObj.getString(TAG_Keterangan);
                         String petugasx = jObj.getString(TAG_Petugas);
