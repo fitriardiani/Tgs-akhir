@@ -104,7 +104,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                                 case bluet.MESSAGE_READ:
                                         byte[] readBuf = (byte[]) msg.obj;
                                         String strIncom = new String(readBuf);
-                                        strIncom = strIncom.trim();
+                                        //strIncom = strIncom.trim();
                                         //try{
                                         searchViewx.setQuery(strIncom,true);//}catch (Exception e){Log.e("ga",strIncom);}
                         }
@@ -178,6 +178,7 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
         private void callData() {
         listData.clear();
         adapter.notifyDataSetChanged();
+
         swipe.setRefreshing(true);
 
         // Creating volley request obj
@@ -282,7 +283,10 @@ public class menuKepemilikan extends AppCompatActivity implements SwipeRefreshLa
                 DataModelPemilik data = new DataModelPemilik();
 
                 data.setId_rfid(obj.getString(TAG_ID_RFID));
-                //data.setNama(obj.getString(TAG_NAMA));
+                data.setNama_pemilik(obj.getString(TAG_Nama_Pemilik));
+                data.setTgl_memiliki(obj.getString(TAG_tgl_memilki));
+                data.setKepemilikan_ke(obj.getString(Tag_Pemilikke));
+                data.setAlamat(obj.getString(Tag_alamat));
 
                 listData.add(data);
                 }

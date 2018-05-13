@@ -1,5 +1,6 @@
 package com.example.ardiani.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
@@ -93,6 +94,7 @@ public class listRfid extends AppCompatActivity implements SwipeRefreshLayout.On
     String tag_json_obj = "json_obj_req";
 
     //MENGIRIM DATA READ/WRITE
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

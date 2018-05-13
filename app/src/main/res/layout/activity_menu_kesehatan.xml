@@ -24,7 +24,7 @@
             android:layout_marginStart="21dp"
             android:alpha="0.8"
             android:text="@string/daftar_data"
-            android:textSize="19sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <Button
